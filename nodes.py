@@ -140,6 +140,7 @@ class RunningHub_ImageQwenI2L_LoraGenerator:
                 "pipeline": ("RH_QwenImageI2LPipeline", ),
                 "training_images": ("IMAGE", ),
                 "seed": ("INT", {"default": 42, "min": 0, "max": 0xffffffffffffffff}),
+                "custom_lora_name": ("STRING", {"default": "", "multiline": False}),
             }
         }
 
@@ -166,6 +167,36 @@ class RunningHub_ImageQwenI2L_LoraGenerator:
     def _make_unique_lora_name(self) -> str:
         return f"i2l_style_lora_{str(uuid.uuid4())}.safetensors"
 
+    def _normalize_user_lora_name(self, name):
+        """
+        Normalize user-provided LoRA file name.
+        - Accepts "file" or "file.safetensors"
+        - Ensures the final name ends with exactly one ".safetensors"
+        - Prevents path traversal by stripping directory components
+        """
+        if name is None:
+            return None
+        name = str(name).strip()
+        if not name:
+            return None
+
+        # Prevent path traversal / accidental directories: collapse separators then take basename.
+        name = name.replace("/", "_").replace("\\", "_")
+        name = os.path.basename(name)
+        if not name or name in {".", ".."}:
+            return None
+
+        ext = ".safetensors"
+        lowered = name.lower()
+        # Strip repeated ".safetensors" suffixes, then append exactly one.
+        while lowered.endswith(ext):
+            name = name[: -len(ext)]
+            lowered = name.lower()
+        name = name.strip()
+        if not name:
+            return None
+        return f"{name}{ext}"
+
     def _get_lora_save_dir(self) -> str:
         """
         Resolve the actual LoRA directory in a cross-platform way.
@@ -187,7 +218,8 @@ class RunningHub_ImageQwenI2L_LoraGenerator:
         training_images = [image.convert("RGB") for image in training_images]
         lora_save_dir = self._get_lora_save_dir()
         os.makedirs(lora_save_dir, exist_ok=True)
-        lora_name = self._make_unique_lora_name()
+        custom_lora_name = kwargs.get("custom_lora_name", "")
+        lora_name = self._normalize_user_lora_name(custom_lora_name) or self._make_unique_lora_name()
         lora_path = os.path.join(lora_save_dir, lora_name)
         with torch.no_grad():
             embs = QwenImageUnit_Image2LoRAEncode().process(pipeline, image2lora_images=training_images)
